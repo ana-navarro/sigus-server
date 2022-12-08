@@ -3,14 +3,13 @@
     "version": "1.0.0",
     "description": "",
     "proxy": "http://127.0.0.1:5000",
-    "homepage": "http://sistemasisgus.com.br/",
+    "homepage": "http://api.sigusminera.online",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "server": "nodemon index.js",
         "client": "npm start --prefix client",
-        "admin": "npm start --prefix admin",
-        "dev": "concurrently \"npm run server\" \"npm run admin\""
+        "admin": "npm start --prefix admin"
     },
     "keywords": [],
     "author": "",

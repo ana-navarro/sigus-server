@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const connection = require('./db/db');
 
 const companyRoutes = require('./routes/companyRoutes');
 const authRoutes = require('./routes/authRoutes');
@@ -10,6 +11,8 @@ const installationNumbersRoutes = require('./routes/installationNumberRoutes');
 const creditRoutes = require('./routes/creditRoute');
 const clientRoutes = require('./routes/clientRoutes');
 const stripe = require('./routes/stripe');
+const checklistRoutes = require('./routes/checklistRoutes');
+const popRoutes = require('./routes/popRoutes');
 
 const app = express();
 
@@ -23,6 +26,16 @@ const connect = async () => {
     console.log(err);
   }
 };
+
+(async () => {
+  try {
+    const conDB = await connection.sync();
+    console.log('Connected with DB');
+  } catch (error) {
+    console.log(error);
+  }
+})();
+
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Backend is running on ${process.env.PORT}`);
   connect();
@@ -39,3 +52,5 @@ app.use('/api/installations_numbers/', installationNumbersRoutes);
 app.use('/api/credit', creditRoutes);
 app.use('/api/client', clientRoutes);
 app.use('/api/stripe', stripe);
+app.use('/api/technical', checklistRoutes);
+app.use('/api/pops', popRoutes);

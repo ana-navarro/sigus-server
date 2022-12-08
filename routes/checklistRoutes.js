@@ -4,6 +4,8 @@ const multerConfig = require('../routes/middlewares/checklist');
 
 const {
   createChecklist,
+  updateChecklist,
+  getChecklist,
   getChecklistAll,
   deleteChecklist,
   imagesChecklist,
@@ -12,7 +14,9 @@ const {
 } = require('../controllers/checklistController');
 
 router.post('/checklist/add/:id', createChecklist);
-router.get('/checklist/:id', getChecklistAll);
+router.put('/checklist/update/:idChecklist', updateChecklist);
+router.get('/checklist/:idChecklist', getChecklist);
+router.get('/checklist/all/:id', getChecklistAll);
 router.delete('/checklist/remove/:id', deleteChecklist);
 
 router.post(

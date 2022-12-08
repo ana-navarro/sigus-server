@@ -1,5 +1,4 @@
 const { Checklist } = require('../models/Checklist');
-const CheckImages = require('../models/ChecklistImages');
 
 const createChecklist = async (req, res) => {
   try {
@@ -304,55 +303,10 @@ const deleteChecklist = async (req, res) => {
   }
 };
 
-const imagesChecklist = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const { originalname: name, size, key, destination: url = '' } = req.file;
-    const checklist = new CheckImages({
-      idInstallationNumber: id,
-      name,
-      size,
-      key,
-      url,
-    });
-    const checklistSave = await checklist.save();
-    res.status(200).json({ msg: 'Image has been salved!', checklistSave });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send({ msg: 'Internal Error!' });
-  }
-};
-
-const getImages = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const checklistList = await CheckImages.find({ installationNumber: id });
-    res.status(200).json(checklistList);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send({ msg: 'Internal Error!' });
-  }
-};
-
-const deleteImagesChecklist = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const checklist = await CheckImages.findById(id);
-    await checklist.remove();
-    res.status(200).json({ msg: 'Image has been deleted!' });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send({ msg: 'Internal Error!' });
-  }
-};
-
 module.exports = {
   createChecklist,
   getChecklist,
   getChecklistAll,
   deleteChecklist,
   updateChecklist,
-  imagesChecklist,
-  getImages,
-  deleteImagesChecklist,
 };

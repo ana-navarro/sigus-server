@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "proxy": "http://127.0.0.1:5000",
-    "homepage": "http://api.sigusminera.online",
+    "homepage": "http://sigus-server.vercel.app/",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -46,6 +46,7 @@
         "react-scripts": "^5.0.1",
         "react-toastify": "^9.0.5",
         "redux": "^4.2.0",
+        "sass": "^1.56.2",
         "sequelize": "^6.23.1",
         "sqlite3": "^5.1.1",
         "stripe": "^11.1.0",

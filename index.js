@@ -10,6 +10,8 @@ const installationNumbersRoutes = require('./routes/installationNumberRoutes');
 const creditRoutes = require('./routes/creditRoute');
 const clientRoutes = require('./routes/clientRoutes');
 const stripe = require('./routes/stripe');
+const checklistRoutes = require('./routes/checklistRoutes');
+const popRoutes = require('./routes/popRoutes');
 
 const app = express();
 
@@ -23,6 +25,7 @@ const connect = async () => {
     console.log(err);
   }
 };
+
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Backend is running on ${process.env.PORT}`);
   connect();
@@ -39,3 +42,5 @@ app.use('/api/installations_numbers/', installationNumbersRoutes);
 app.use('/api/credit', creditRoutes);
 app.use('/api/client', clientRoutes);
 app.use('/api/stripe', stripe);
+app.use('/api/technical', checklistRoutes);
+app.use('/api/pops', popRoutes);

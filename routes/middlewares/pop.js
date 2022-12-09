@@ -25,7 +25,7 @@ module.exports = {
     fileSize: 2 * 1024 * 1024,
   },
   fileFilter: (req, file, cb) => {
-    const allowedMimes = ['application/pdf'];
+    const allowedMimes = ['application/pdf', 'application/msword'];
     if (allowedMimes.includes(file.mimetype)) {
       cb(null, true);
     } else {

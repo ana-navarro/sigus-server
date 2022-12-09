@@ -1,63 +1,33 @@
-const Sequelize = require('sequelize');
-const database = require('../db/db');
+const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
-const sequelize = new Sequelize('sqlite::memory:');
 
-const POP = database.define(
-  'pop',
-  {
-    id: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      primaryKey: true,
-    },
-    name: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    size: { type: Sequelize.NUMBER },
-    key: { type: Sequelize.STRING },
-    url: { type: Sequelize.STRING },
-  },
-  {
-    timestamps: true,
-    tableName: 'pops',
-  },
-);
-
-POP.addHook('beforeCreate', (record, options) => {
-  record.dataValues.createdAt = new Date()
-    .toISOString()
-    .replace(/T/, ' ')
-    .replace(/\..+/g, '');
-  record.dataValues.updatedAt = new Date()
-    .toISOString()
-    .replace(/T/, ' ')
-    .replace(/\..+/g, '');
+const POPSchema = mongoose.Schema({
+  name: { type: String },
+  size: { type: Number },
+  key: { type: String },
+  url: { type: String },
 });
 
-POP.addHook('beforeUpdate', (record, options) => {
-  record.dataValues.updatedAt = new Date()
-    .toISOString()
-    .replace(/T/, ' ')
-    .replace(/\..+/g, '');
+POPSchema.pre('remove', function () {
+  try {
+    fs.unlinkSync(
+      path.resolve(
+        __dirname,
+        '..',
+        '..',
+        'sigus-server',
+        'tmp',
+        'uploads',
+        'pops',
+        this.key,
+      ),
+    );
+  } catch (error) {
+    console.log(error);
+  }
 });
 
-POP.addHook('beforeDestroy', async (record, options) => {
-  await fs.unlink(
-    path.resolve(
-      __dirname,
-      '..',
-      '..',
-      'server',
-      'tmp',
-      'uploads',
-      'pops',
-      record.key,
-    ),
-    function (err) {},
-  );
-});
+const POP = mongoose.model('POP', POPSchema);
 
 module.exports = POP;

@@ -50,3 +50,5 @@ app.use('/api/client', clientRoutes);
 app.use('/api/stripe', stripe);
 app.use('/api/technical', checklistRoutes);
 app.use('/api/pops', popRoutes);
+
+module.exports = app;

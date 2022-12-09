@@ -12,8 +12,8 @@ router.post('/:id/payment', async (req, res) => {
     try {
         const credit = await Credit.findById(req.params.id);
         const session = await stripe.checkout.sessions.create({
-            success_url: `http://localhost:3000/success`,
-            cancel_url: `http://localhost:3000/cancel`,
+            success_url: `http://sigusminera.online/success`,
+            cancel_url: `http://sigusminera.online/cancel`,
             mode: "payment",
             payment_method_types: ['boleto'],
             payment_method_options: {

@@ -36,7 +36,7 @@ router.post("/:id/send-demo", async (req, res) => {
                 from: process.env.EMAIL,
                 to: company.email,
                 subject: "Demonstração",
-                text: `Acesse o link para ver a Demonstração e também conseguir o link de pagamento: http://localhost:3000/demo/${validDemo._id}/`
+                text: `Acesse o link para ver a Demonstração e também conseguir o link de pagamento: http://sigusminera.online/demo/${validDemo._id}/`
             }
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {

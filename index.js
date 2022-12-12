@@ -51,4 +51,10 @@ app.use('/api/stripe', stripe);
 app.use('/api/technical', checklistRoutes);
 app.use('/api/pops', popRoutes);
 
+app.use(express.static(path.resolve(__dirname, '../build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve('../public_html/sigus-app/build/index.html'));
+});
+
 module.exports = app;

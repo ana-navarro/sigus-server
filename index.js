@@ -32,7 +32,11 @@ app.listen(process.env.PORT || 5000, () => {
   connect();
 });
 
-app.use(cors())
+// app.use(cors())
+app.options("*", cors({ origin: 'http://181.215.134.184:5000', optionsSuccessStatus: 200 }));
+
+app.use(cors({ origin: "http://181.215.134.184:5000", optionsSuccessStatus: 200 }));
+
 app.use(express.json());
 
 //routes

@@ -32,14 +32,8 @@ app.listen(process.env.PORT || 5000, () => {
   connect();
 });
 
-// app.use(cors({ origin: true, credentials: true }));
+app.use(cors())
 app.use(express.json());
-
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://sigus-app.vercel.app/");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 
 //routes
 app.use('/api/company', companyRoutes);

@@ -116,7 +116,7 @@ router.post("/reset-password", async (req, res) => {
         from: process.env.EMAIL,
         to: userfind.email,
         subject: "Emai para troca de senha!",
-        text: `Para trocar a senha acesse o link: https://www.sigusminera.online/forgotpassword/${userfind.id}/`
+        text: `Para trocar a senha acesse o link: https://sigus-app.vercel.app/forgotpassword/${userfind.id}/`
       }
 
       transporter.sendMail(mailOptions, (error, info) => {

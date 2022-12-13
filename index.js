@@ -34,11 +34,6 @@ app.listen(process.env.PORT || 5000, () => {
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'build')));
-
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
 
 //routes
 app.use('/api/company', companyRoutes);
@@ -50,11 +45,5 @@ app.use('/api/client', clientRoutes);
 app.use('/api/stripe', stripe);
 app.use('/api/technical', checklistRoutes);
 app.use('/api/pops', popRoutes);
-
-app.use(express.static(path.resolve(__dirname, '../build')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve('../public_html/sigus-app/build/index.html'));
-});
 
 module.exports = app;

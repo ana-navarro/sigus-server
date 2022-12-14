@@ -15,6 +15,7 @@ const stripe = require('./routes/stripe');
 const checklistRoutes = require('./routes/checklistRoutes');
 const popRoutes = require('./routes/popRoutes');
 const allowCors = require('./allowCors');
+const path = require('path');
 
 const app = express();
 
@@ -22,7 +23,12 @@ dotenv.config();
 
 const connect = async () => {
   try {
-    mongoose.connect(process.env.DB);
+    mongoose.connect(process.env.DB, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+    });
     console.log('DB is connected!');
   } catch (err) {
     console.log(err);
@@ -60,5 +66,19 @@ app.use('/api/client', clientRoutes);
 app.use('/api/stripe', stripe);
 app.use('/api/technical', checklistRoutes);
 app.use('/api/pops', popRoutes);
+
+
+app.use(express.static(path.join(__dirname, "./sigus-app/build")));
+
+app.get("*", function (_, res) {
+  res.sendFile(
+    path.join(__dirname, "../sigus-app/build/index.html"),
+    function (err) {
+      if (err) {
+        res.status(500).send(err)
+      }
+    }
+  )
+})
 
 module.exports = app;

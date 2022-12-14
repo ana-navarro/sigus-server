@@ -1,7 +1,8 @@
 {
-    "name": "tcc",
+    "name": "sigus",
     "version": "1.0.0",
     "description": "",
+    "private": true,
     "homepage": "https://sigus-app.vercel.app",
     "main": "index.js",
     "scripts": {

@@ -38,13 +38,9 @@ app.use((_req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', '*');
   res.header('Access-Control-Allow-Methods', '*');
-  res.header('Access-Control-Allow-Credentials', 'false');
 
   next();
 });
-
-app.options("*", cors({ origin: 'http://181.215.134.184:5000', optionsSuccessStatus: 200 }));
-app.options("*", cors({ origin: "https://sigus-app.vercel.app/", optionsSuccessStatus: 200 }));
 
 // app.use(cors({ origin: true, credentials: true }));
 

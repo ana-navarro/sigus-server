@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
     }
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: 'Internal Server Error' });
+    res.status(500).json({ msg: 'Internal Server Error' }).setHeader('Access-Control-Allow-Headers', 'Authorization');
   }
 });
 

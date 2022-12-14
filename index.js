@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const companyRoutes = require('./routes/companyRoutes');
 const authRoutes = require('./routes/authRoutes');
@@ -32,10 +33,6 @@ app.listen(process.env.PORT || 5000, () => {
   connect();
 });
 
-app.listen(80, function () {
-  console.log('CORS-enabled web server listening on port 80')
-})
-
 app.use(cors());
 app.use((_req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -53,6 +50,14 @@ app.options("*", cors({ origin: "https://sigus-app.vercel.app/", optionsSuccessS
 
 
 app.use(express.json());
+
+app.use(
+  '/api',
+  createProxyMiddleware({
+    target: 'http://181.215.134.184:5000',
+    changeOrigin: true,
+  })
+);
 
 //routes
 app.use('/api/company', companyRoutes);

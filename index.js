@@ -14,6 +14,7 @@ const clientRoutes = require('./routes/clientRoutes');
 const stripe = require('./routes/stripe');
 const checklistRoutes = require('./routes/checklistRoutes');
 const popRoutes = require('./routes/popRoutes');
+const allowCors = require('./allowCors');
 
 const app = express();
 
@@ -34,13 +35,7 @@ app.listen(process.env.PORT || 5000, () => {
 });
 
 app.use(cors());
-app.use((_req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', '*');
-  res.header('Access-Control-Allow-Methods', '*');
-
-  next();
-});
+app.use(allowCors());
 
 // app.use(cors({ origin: true, credentials: true }));
 
